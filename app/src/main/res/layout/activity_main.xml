@@ -1,122 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:text="TextView" />
+
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RadioButton" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RadioButton" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kalkulator Pajak Kendaraan"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Input NJKB / PKB Dasar -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nilai PKB Dasar (Rp):" />
+            android:text="TextView" />
 
         <EditText
-            android:id="@+id/etPkbDasar"
+            android:id="@+id/editTextText2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contoh: 250000"
-            android:inputType="number"
-            android:layout_marginBottom="12dp" />
+            android:ems="10"
+            android:inputType="text"
+            android:text="Name" />
 
-        <!-- Radio Button Jenis Kendaraan -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Jenis Kendaraan:" />
+    </RadioGroup>
 
-        <RadioGroup
-            android:id="@+id/rgJenisKendaraan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="12dp">
-
-            <RadioButton
-                android:id="@+id/rbMotor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Motor"
-                android:checked="true" />
-
-            <RadioButton
-                android:id="@+id/rbMobil"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mobil"
-                android:layout_marginStart="24dp" />
-        </RadioGroup>
-
-        <!-- Radio Button Jenis Pajak -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Jenis Pembayaran Pajak:" />
-
-        <RadioGroup
-            android:id="@+id/rgJenisPajak"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="12dp">
-
-            <RadioButton
-                android:id="@+id/rbTahunan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pajak Tahunan"
-                android:checked="true" />
-
-            <RadioButton
-                android:id="@+id/rbLimaTahunan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pajak 5 Tahunan (Ganti Plat)" />
-        </RadioGroup>
-
-        <!-- Input Keterlambatan Bulan -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Keterlambatan (Bulan):" />
-
-        <EditText
-            android:id="@+id/etKeterlambatan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Isi 0 jika tidak terlambat"
-            android:inputType="number"
-            android:text="0"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Tombol Hitung -->
-        <Button
-            android:id="@+id/btnHitung"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hitung Total Pajak" />
-
-        <!-- Tampilan Hasil -->
-        <TextView
-            android:id="@+id/tvHasil"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:paddingTop="16dp"
-            android:text="Total Rincian: Rp 0" />
-
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>
