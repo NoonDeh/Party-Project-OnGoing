@@ -44,100 +44,109 @@ public class MainActivity extends AppCompatActivity {
         RadioGroup JnsKnd = findViewById(R.id.JenisKendaraan);
         int HasilPilihJenisKendaraan = JnsKnd.getCheckedRadioButtonId();
 
-
-
-
         if (HasilPilihJenisKendaraan != -1) {
             if (!ccString.isEmpty() && !ccString.equals("-")) {
-                if (!pjkstnkString.isEmpty() && !pjkstnkString.equals("-") ) {
-                    if (!usiaString.isEmpty() && !usiaString.equals("-")) {
-
-                        RadioButton PilihanRadioButton = findViewById(HasilPilihJenisKendaraan);
-                        String JenisPilihan = PilihanRadioButton.getText().toString();
-
-                        if (JenisPilihan.equals("Mobil")) {
-                            Bobot = 1.025;
-                        } else if (JenisPilihan.equals("Motor")) {
-                            Bobot = 1.0;
-                        } else {
-                            Bobot = 1.3;
-                        }
-                        double TarifPajakDaerah = 0.02; // ini pajak daerah 2%
-
-                        int cc = Integer.parseInt(InputCC.getText().toString().trim());
+                int cc = Integer.parseInt(InputCC.getText().toString().trim());
+                if (cc > 0) {
+                    if (!pjkstnkString.isEmpty() && !pjkstnkString.equals("-")) {
                         double PajakSTNK = Double.parseDouble(InputPajakSTNK.getText().toString().trim());
-                        int usiaKendaraan = Integer.parseInt(InputUsiaKendaraan.getText().toString().trim());
-                        double awalnjkb = (PajakSTNK / TarifPajakDaerah); //Contoh pajak daerah = 2%. krn bnyk & berbeda tiap daerah
+                        if(PajakSTNK > 0) {
+                            if (!usiaString.isEmpty() && !usiaString.equals("-")) {
+                                int usiaKendaraan = Integer.parseInt(InputUsiaKendaraan.getText().toString().trim());
+                                if(usiaKendaraan  >= 0) {
+
+                                    RadioButton PilihanRadioButton = findViewById(HasilPilihJenisKendaraan);
+                                    String JenisPilihan = PilihanRadioButton.getText().toString();
+
+                                    if (JenisPilihan.equals("Mobil")) {
+                                        Bobot = 1.025;
+                                    } else if (JenisPilihan.equals("Motor")) {
+                                        Bobot = 1.0;
+                                    } else {
+                                        Bobot = 1.3;
+                                    }
+                                    double TarifPajakDaerah = 0.02; // ini pajak daerah 2%
 
 
-                        double penguranganUsiaK = 0.0;
+                                    double awalnjkb = (PajakSTNK / TarifPajakDaerah); //Contoh pajak daerah = 2%. krn bnyk & berbeda tiap daerah
 
-                        if (usiaKendaraan >= 10) {
-                            penguranganUsiaK = 0.5;
-                        } else if (usiaKendaraan > 0) {
-                            penguranganUsiaK = 0.05;
-                            for (int i = 1; i < usiaKendaraan; i++) {
-                                if (penguranganUsiaK >= 0.5) {
-                                    penguranganUsiaK = 0.5;
+
+                                    double penguranganUsiaK = 0.0;
+
+                                    if (usiaKendaraan >= 10) {
+                                        penguranganUsiaK = 0.5;
+                                    } else if (usiaKendaraan > 0) {
+                                        penguranganUsiaK = 0.05;
+                                        for (int i = 1; i < usiaKendaraan; i++) {
+                                            if (penguranganUsiaK >= 0.5) {
+                                                penguranganUsiaK = 0.5;
+                                            } else {
+                                                penguranganUsiaK = 0.05 + penguranganUsiaK;
+                                            }
+
+                                        }
+                                    } else {
+                                        penguranganUsiaK = 0.00;
+
+                                    }
+
+                                    double njkb = awalnjkb - (awalnjkb * penguranganUsiaK); //hitung njkb, spt rumus njkb/
+                                    double pkbPokok = njkb * Bobot * TarifPajakDaerah; //sm sprt sebelumnya tarif pajak daerah = 2%
+
+
+                                    int swdkllj = 0;
+                                    if (cc <= 250 && JenisPilihan.equals("Motor")) {
+                                        swdkllj = 35000;
+                                    } else if (cc > 250 && JenisPilihan.equals("Motor")) {
+                                        swdkllj = 80000;
+                                    } else if (cc < 2400 && JenisPilihan.equals("Mobil")) {
+                                        swdkllj = 70000;
+                                    } else if (cc > 2400 && JenisPilihan.equals("Mobil")) {
+                                        swdkllj = 140000;
+                                    } else {
+                                        swdkllj = 0;
+                                    }
+
+                                    int sertif = 3000;
+                                    int Total_swdkllj = swdkllj + sertif;
+                                    int biayaAdministrasi = 50000;
+                                    double PKBtotal = pkbPokok + Total_swdkllj + biayaAdministrasi;
+
+                                    //warnai elemen Total
+                                    int warnaBerhasil_Hijau = ContextCompat.getColor(this, R.color.greenSuccess);
+                                    HasilTotal.setBackgroundColor(warnaBerhasil_Hijau);
+
+                                    //bgn HasilTampil Text
+                                    Tekspkbp.setText("PKB Pokok:");
+                                    Teksswd.setText("SWDKLLJ Pokok");
+                                    Teksbad.setText("Biaya Administrasi:");
+                                    Tekssod.setText("Sertifikat/Dana:");
+                                    Tekstotal.setText("ESTIMASI:");
+
+                                    //bgn HasilTampil Output
+                                    Hasilpkb.setText("Rp " + String.format("%,.0f", pkbPokok));
+                                    HasilSWDKLLJ.setText("Rp " + String.format("%,d", swdkllj));
+                                    hasilAdministrasi.setText("Rp " + String.format("%,d", biayaAdministrasi));
+                                    HasilSertif.setText("Rp " + String.format("%,d", sertif));
+                                    HasilTotal.setText("Rp " + String.format("%,.0f", PKBtotal));
+
+                                    Toast.makeText(this, "Estimasi bayar : Rp" + String.format("%,.0f", PKBtotal), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(this, "Usia Kendaraan tidak boleh Negatif!", Toast.LENGTH_SHORT).show();
                                 }
-                                else {
-                                    penguranganUsiaK = 0.05 + penguranganUsiaK;
-                                }
-
+                            } else {
+                                Toast.makeText(this, "Masukan Usia Kendaraan Terlebih dahulu!", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            penguranganUsiaK = 0.00;
-
+                            Toast.makeText(this, "Pajak STNK tidak boleh 0(nol)!", Toast.LENGTH_SHORT).show();
                         }
-
-                        double njkb = awalnjkb - (awalnjkb * penguranganUsiaK); //hitung njkb, spt rumus njkb/
-                        double pkbPokok = njkb * Bobot * TarifPajakDaerah; //sm sprt sebelumnya tarif pajak daerah = 2%
-
-
-                        int swdkllj = 0;
-                        if (cc <= 250 && JenisPilihan.equals("Motor")) {
-                            swdkllj = 35000;
-                        } else if (cc > 250 && JenisPilihan.equals("Motor")) {
-                            swdkllj = 80000;
-                        } else if (cc < 2400 && JenisPilihan.equals("Mobil")) {
-                            swdkllj = 70000;
-                        } else if (cc > 2400 && JenisPilihan.equals("Mobil")) {
-                            swdkllj = 140000;
-                        } else {
-                            swdkllj = 0;
-                        }
-
-                        int sertif = 3000;
-                        int Total_swdkllj = swdkllj + sertif;
-                        int biayaAdministrasi = 50000;
-                        double PKBtotal = pkbPokok + Total_swdkllj + biayaAdministrasi;
-
-                        //warnai elemen Total
-                        int warnaBerhasil_Hijau = ContextCompat.getColor(this, R.color.greenSuccess);
-                        HasilTotal.setBackgroundColor(warnaBerhasil_Hijau);
-
-                        //bgn HasilTampil Text
-                        Tekspkbp.setText("PKB Pokok:");
-                        Teksswd.setText("SWDKLLJ Pokok");
-                        Teksbad.setText("Biaya Administrasi:");
-                        Tekssod.setText("Sertifikat/Dana:");
-                        Tekstotal.setText("ESTIMASI:");
-
-                        //bgn HasilTampil Output
-                        Hasilpkb.setText("Rp " + String.format("%,.0f", pkbPokok));
-                        HasilSWDKLLJ.setText("Rp " + String.format("%,d", swdkllj));
-                        hasilAdministrasi.setText("Rp " + String.format("%,d", biayaAdministrasi));
-                        HasilSertif.setText("Rp " + String.format("%,d", sertif));
-                        HasilTotal.setText("Rp " + String.format("%,.0f", PKBtotal));
-
-                        Toast.makeText(this, "Estimasi bayar : Rp" + String.format("%,.0f", PKBtotal), Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        Toast.makeText(this, "Masukan Usia Kendaraan Terlebih dahulu!", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(this, "Masukan Pajak STNK Terlebih dahulu!", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else {
-                    Toast.makeText(this, "Masukan Pajak STNK Terlebih dahulu!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "CC Kendaraan tidak boleh 0(nol)!", Toast.LENGTH_SHORT).show();
                 }
             }
             else {
