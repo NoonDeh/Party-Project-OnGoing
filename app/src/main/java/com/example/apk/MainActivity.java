@@ -50,9 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (HasilPilihJenisKendaraan != -1) {
-            if (!ccString.isEmpty()) {
-                if (!pjkstnkString.isEmpty()) {
-                    if (!usiaString.isEmpty()) {
+            if (!ccString.isEmpty()&& !ccString.equals("-")) {
+                if (!pjkstnkString.isEmpty() && !pjkstnkString.equals("-") ) {
+                    if (!usiaString.isEmpty() && !usiaString.equals("-")) {
 
                         RadioButton PilihanRadioButton = findViewById(HasilPilihJenisKendaraan);
                         String JenisPilihan = PilihanRadioButton.getText().toString();
