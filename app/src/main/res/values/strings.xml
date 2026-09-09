@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">APK</string>
-    <string name="v">Value</string>
+    <string name="c">Masukan CC Kendaraan</string>
+    <string name="p">Masukan Pajak STNK</string>
+    <string name="u">Masukan Usia Kendaraan</string>
     <string name="cc">CC Kendaraan</string>
     <string name="m">Mobil</string>
     <string name="mt">Motor</string>
-    <string name="hk">Harga Kendaraan</string>
+    <string name="ps">Pajak STNK</string>
     <string name="uk">Usia Kendaaraan</string>
     <string name="pkb">PKB Pokok:</string>
     <string name="sw">SWDKLLJ Pokok:</string>
@@ -12,4 +14,6 @@
     <string name="sd">Sertifikat/Dana:</string>
     <string name="tl">TOTAL:</string>
     <string name="sub">Submit</string>
+    <string name="ap">Aplikasi Pajak Kendaraan</string>
+    <string name="jk">Jenis Kendaraan:</string>
 </resources>
