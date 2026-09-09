@@ -72,14 +72,24 @@ public class MainActivity extends AppCompatActivity {
                         double awalnjkb = (PajakSTNK / TarifPajakDaerah) * 2; //Contoh pajak daerah = 2%. krn bnyk & berbeda tiap daerah
 
 
-                        double penguranganUsiaK = 0;
+                        double penguranganUsiaK = 0.0;
 
-                        if (penguranganUsiaK > 50) {
+                        if (usiaKendaraan >= 10) {
                             penguranganUsiaK = 0.5;
-                        } else {
-                            for (int i = 1; i <= usiaKendaraan; i++) {
-                                penguranganUsiaK = 0.05;
+                        } else if (usiaKendaraan > 0) {
+                            penguranganUsiaK = 0.05;
+                            for (int i = 1; i < usiaKendaraan; i++) {
+                                if (penguranganUsiaK >= 0.5) {
+                                    penguranganUsiaK = 0.5;
+                                }
+                                else {
+                                    penguranganUsiaK = 0.05 + penguranganUsiaK;
+                                }
+
                             }
+                        } else {
+                            penguranganUsiaK = 0.00;
+
                         }
 
                         double njkb = awalnjkb - (awalnjkb * penguranganUsiaK);
