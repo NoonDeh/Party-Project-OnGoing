@@ -11,7 +11,8 @@
     <TextView
         android:id="@+id/judul"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center"
         android:text="@string/ap"
         android:background="@color/orange"
         android:textColor="@color/white"
@@ -20,84 +21,119 @@
         android:textAlignment="center"
         />
 
-    <TextView
-        android:id="@+id/jenis"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/jk"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_margin="10dp"
+        android:orientation="vertical">
 
-    <RadioGroup
-        android:id="@+id/JenisKendaraan"
-        android:layout_width="match_parent"
-        android:layout_height="99dp">
-
-        <RadioButton
-            android:id="@+id/mobil"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/m"
-            android:textStyle="bold" />
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/motor"
+            <TextView
+                android:id="@+id/jenis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/jk"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/JenisKendaraan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/mobil"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/m"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/motor"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mt"
+                    android:textStyle="bold" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/mt"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-    </RadioGroup>
+            <TextView
+                android:id="@+id/cck"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cc"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/cck"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cc"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+            <EditText
+                android:id="@+id/InputCC"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:ems="10"
+                android:hint="@string/c"
+                android:inputType="numberSigned"
+                android:maxLength="5" />
 
-    <EditText
-        android:id="@+id/InputCC"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:maxLength="5"
-        android:hint="@string/c"
-        android:inputType="numberSigned" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/pjkstnk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/ps"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/InputPajakSTNK"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:inputType="numberSigned"
-        android:hint="@string/p" />
+            <TextView
+                android:id="@+id/pjkstnk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ps"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/usk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="@string/uk"
-        android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/InputPajakSTNK"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:ems="10"
+                android:hint="@string/p"
+                android:inputType="numberSigned" />
+        </LinearLayout>
 
-    <EditText
-        android:id="@+id/editusia"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:maxLength="3"
-        android:inputType="numberSigned"
-        android:hint="@string/u"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/usk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/uk"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editusia"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:ems="10"
+                android:hint="@string/u"
+                android:inputType="numberSigned"
+                android:maxLength="3" />
+        </LinearLayout>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/pkbp"
