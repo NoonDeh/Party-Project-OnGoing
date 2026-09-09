@@ -94,6 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:ems="10"
+        android:maxLength="3"
         android:inputType="numberSigned"
         android:hint="@string/u"/>
 
@@ -102,8 +103,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:text="@string/pkb" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/hasilpkb"
@@ -116,8 +116,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:text="@string/sw" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/SWDKLLJ"
@@ -129,7 +128,6 @@
         android:id="@+id/bad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/bya"
         android:textSize="18sp"
         android:textStyle="bold"/>
 
@@ -143,7 +141,6 @@
         android:id="@+id/sod"
         android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:text="@string/sd"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -157,7 +154,6 @@
         android:id="@+id/total"
         android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:text="@string/tl"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -174,7 +170,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sub"
-        android:backgroundTint="@color/grey"
+        android:backgroundTint="@color/blue"
         android:onClick="Submit"/>
 
 </LinearLayout>
