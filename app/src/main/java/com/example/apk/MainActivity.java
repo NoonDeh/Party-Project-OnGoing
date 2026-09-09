@@ -14,96 +14,79 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText etPkbDasar, etKeterlambatan;
-    private RadioGroup rgJenisKendaraan, rgJenisPajak;
-    private RadioButton rbMotor, rbTahunan;
-    private Button btnHitung;
-    private TextView tvHasil;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Inisialisasi Komponen UI
-        etPkbDasar = findViewById(R.id.etPkbDasar);
-        etKeterlambatan = findViewById(R.id.etKeterlambatan);
-        rgJenisKendaraan = findViewById(R.id.rgJenisKendaraan);
-        rgJenisPajak = findViewById(R.id.rgJenisPajak);
-        rbMotor = findViewById(R.id.rbMotor);
-        rbTahunan = findViewById(R.id.rbTahunan);
-        btnHitung = findViewById(R.id.btnHitung);
-        tvHasil = findViewById(R.id.tvHasil);
 
-        btnHitung.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hitungPajak();
+    }
+    public void Submit (View view) {
+        EditText InputCC = findViewById(R.id.InputCC);
+        EditText InputHarga = findViewById(R.id.editharga);
+        EditText InputUsiaKendaraan = findViewById(R.id.editusia);
+        TextView Hasilpkb = findViewById(R.id.hasilpkb);
+        TextView HasilSWDKLLJ = findViewById(R.id.SWDKLLJ);
+        TextView HasilSertif = findViewById(R.id.Sertif);
+        TextView HasilTotal = findViewById(R.id.hasilTotal);
+
+        Double Bobot = 0.0;
+
+        RadioGroup JnsKnd = findViewById(R.id.JenisKendaraan);
+        int HasilPilihJenisKendaraan = JnsKnd.getCheckedRadioButtonId();
+
+        if (HasilPilihJenisKendaraan != -1) {
+            RadioButton PilihanRadioButton = findViewById(HasilPilihJenisKendaraan);
+            String JenisPilihan = PilihanRadioButton.getText().toString();
+
+            if (JenisPilihan == "Mobil") {
+                Bobot = 1.025;
             }
-        });
+            else if (JenisPilihan == "Motor") {
+                Bobot = 1.0;
+            }
+            else {
+                Bobot = 1.3;
+            }
+            double TarifPajakDaerah = 0.02;
+
+            int cc = Integer.parseInt(InputCC.getText().toString().trim());
+            double PajakSTNK = Double.parseDouble(InputHarga.getText().toString().trim());
+            int usiaKendaraan = Integer.parseInt(InputUsiaKendaraan.getText().toString().trim());
+            double njkb = (PajakSTNK / TarifPajakDaerah) * 2; //Contoh pajak daerah = 2%. krn bnyk & berbeda tiap daerah
+            double pkbPokok = njkb * Bobot * TarifPajakDaerah; //sm sprt sebelumnya tarif pajak daerah = 2%
+
+
+            int swdkllj = 0;
+            if (cc <= 250 && JenisPilihan == "Motor") {
+                swdkllj = 35000;
+            } else if (cc > 250 && JenisPilihan == "Motor") {
+                swdkllj = 80000;
+            } else if (cc < 2400 && JenisPilihan == "Mobil") {
+                swdkllj = 70000;
+            } else if (cc > 2400 && JenisPilihan == "Mobil") {
+                swdkllj = 140000;
+            }
+
+            int Total_swdkllj = swdkllj + 3000;
+
+            // 3. Biaya Administrasi / Sertifikat / Pengesahan STNK (Contoh flat)
+            int biayaAdministrasi = 50000;
+
+            // 4. Total Pajak Kendaraan
+            double PKBtotal = pkbPokok + swdkllj + biayaAdministrasi;
+
+            // Tampilkan hasil ke TextView
+            Hasilpkb.setText("PKB Pokok: Rp " + String.format("%,.0f", pkbPokok));
+            HasilSWDKLLJ.setText("SWDKLLJ: Rp " + String.format("%,d", swdkllj));
+            HasilSertif.setText("Admin/Sertifikat: Rp " + String.format("%,d", biayaAdministrasi));
+            HasilTotal.setText("Total Pajak: Rp " + String.format("%,.0f", PKBtotal));
+
+        } else {
+            Toast.makeText(this, "Pilih Jenis Kendaraan Terlebih dahulu", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
-    private void hitungPajak() {
-        String inputPkb = etPkbDasar.getText().toString().trim();
-        String inputBulan = etKeterlambatan.getText().toString().trim();
-
-        if (inputPkb.isEmpty()) {
-            Toast.makeText(this, "Masukkan nilai PKB dasar terlebih dahulu", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        double pkbDasar = Double.parseDouble(inputPkb);
-        int bulanTerlambat = inputBulan.isEmpty() ? 0 : Integer.parseInt(inputBulan);
-
-        boolean isMotor = rbMotor.isChecked();
-        boolean isTahunan = rbTahunan.isChecked();
-
-        // 1. Penentuan Nilai Konstanta
-        double swdkllj = isMotor ? 32000 : 143000;
-        double dendaSwdklljFlat = isMotor ? 32000 : 100000;
-        double pnbpStnk = isMotor ? 100000 : 200000;
-        double pnbpPlat = isMotor ? 60000 : 100000;
-
-        // 2. Hitung Denda Keterlambatan
-        double dendaPkb = 0;
-        double dendaSwdkllj = 0;
-
-        if (bulanTerlambat > 0) {
-            dendaPkb = pkbDasar * 0.02 * bulanTerlambat;
-            dendaSwdkllj = dendaSwdklljFlat;
-        }
-
-        // 3. Hitung Total Pembayaran
-        double totalTahunan = pkbDasar + swdkllj + dendaPkb + dendaSwdkllj;
-        double totalBayar = totalTahunan;
-
-        if (!isTahunan) {
-            totalBayar += (pnbpStnk + pnbpPlat);
-        }
-
-        // Format Angka ke Rupiah
-        NumberFormat rupiahFormat = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
-        String hasilFormatted = rupiahFormat.format(totalBayar);
-
-        // Tampilkan Rincian
-        StringBuilder rincian = new StringBuilder();
-        rincian.append("Rincian Pajak:\n");
-        rincian.append("- PKB Dasar: ").append(rupiahFormat.format(pkbDasar)).append("\n");
-        rincian.append("- SWDKLLJ: ").append(rupiahFormat.format(swdkllj)).append("\n");
-
-        if (bulanTerlambat > 0) {
-            rincian.append("- Denda PKB: ").append(rupiahFormat.format(dendaPkb)).append("\n");
-            rincian.append("- Denda SWDKLLJ: ").append(rupiahFormat.format(dendaSwdkllj)).append("\n");
-        }
-
-        if (!isTahunan) {
-            rincian.append("- Cetak STNK 5 Thn: ").append(rupiahFormat.format(pnbpStnk)).append("\n");
-            rincian.append("- Cetak Plat TNKB: ").append(rupiahFormat.format(pnbpPlat)).append("\n");
-        }
-
-        rincian.append("\nTOTAL BAYAR: ").append(hasilFormatted);
-
-        tvHasil.setText(rincian.toString());
-    }
 }
 
