@@ -8,6 +8,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (HasilPilihJenisKendaraan != -1) {
-            if (!ccString.isEmpty()&& !ccString.equals("-")) {
+            if (!ccString.isEmpty() && !ccString.equals("-")) {
                 if (!pjkstnkString.isEmpty() && !pjkstnkString.equals("-") ) {
                     if (!usiaString.isEmpty() && !usiaString.equals("-")) {
 
@@ -61,12 +62,12 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             Bobot = 1.3;
                         }
-                        double TarifPajakDaerah = 0.02;
+                        double TarifPajakDaerah = 0.02; // ini pajak daerah 2%
 
                         int cc = Integer.parseInt(InputCC.getText().toString().trim());
                         double PajakSTNK = Double.parseDouble(InputPajakSTNK.getText().toString().trim());
                         int usiaKendaraan = Integer.parseInt(InputUsiaKendaraan.getText().toString().trim());
-                        double awalnjkb = (PajakSTNK / TarifPajakDaerah) * 2; //Contoh pajak daerah = 2%. krn bnyk & berbeda tiap daerah
+                        double awalnjkb = (PajakSTNK / TarifPajakDaerah); //Contoh pajak daerah = 2%. krn bnyk & berbeda tiap daerah
 
 
                         double penguranganUsiaK = 0.0;
@@ -89,11 +90,11 @@ public class MainActivity extends AppCompatActivity {
 
                         }
 
-                        double njkb = awalnjkb - (awalnjkb * penguranganUsiaK);
+                        double njkb = awalnjkb - (awalnjkb * penguranganUsiaK); //hitung njkb, spt rumus njkb/
                         double pkbPokok = njkb * Bobot * TarifPajakDaerah; //sm sprt sebelumnya tarif pajak daerah = 2%
 
 
-                        int swdkllj = 5000;
+                        int swdkllj = 0;
                         if (cc <= 250 && JenisPilihan.equals("Motor")) {
                             swdkllj = 35000;
                         } else if (cc > 250 && JenisPilihan.equals("Motor")) {
@@ -107,20 +108,22 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         int sertif = 3000;
-
                         int Total_swdkllj = swdkllj + sertif;
-
                         int biayaAdministrasi = 50000;
+                        double PKBtotal = pkbPokok + Total_swdkllj + biayaAdministrasi;
 
-                        double PKBtotal = pkbPokok + swdkllj + biayaAdministrasi;
+                        //warnai elemen Total
+                        int warnaBerhasil_Hijau = ContextCompat.getColor(this, R.color.greenSuccess);
+                        HasilTotal.setBackgroundColor(warnaBerhasil_Hijau);
 
+                        //bgn HasilTampil Text
                         Tekspkbp.setText("PKB Pokok:");
                         Teksswd.setText("SWDKLLJ Pokok");
                         Teksbad.setText("Biaya Administrasi:");
                         Tekssod.setText("Sertifikat/Dana:");
                         Tekstotal.setText("ESTIMASI:");
 
-
+                        //bgn HasilTampil Output
                         Hasilpkb.setText("Rp " + String.format("%,.0f", pkbPokok));
                         HasilSWDKLLJ.setText("Rp " + String.format("%,d", swdkllj));
                         hasilAdministrasi.setText("Rp " + String.format("%,d", biayaAdministrasi));

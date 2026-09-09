@@ -2,9 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="warm">#FFF5F5</color>
+    <color name="Teks">#1E293B</color>
     <color name="orange">#FF5722</color>
     <color name="grey">#29292C</color>
-    <color name="blue">#00b4d8</color>
+    <color name="green">#10B981</color>
+    <color name="greenGelap">#1B956D</color>
+    <color name="greenSuccess">#22C55E</color>
+    <color name="clear">#F4F6F8</color>
+
+
 
 </resources>
