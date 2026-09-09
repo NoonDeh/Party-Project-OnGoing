@@ -57,9 +57,9 @@ public class MainActivity extends AppCompatActivity {
                         RadioButton PilihanRadioButton = findViewById(HasilPilihJenisKendaraan);
                         String JenisPilihan = PilihanRadioButton.getText().toString();
 
-                        if (JenisPilihan == "Mobil") {
+                        if (JenisPilihan.equals("Mobil")) {
                             Bobot = 1.025;
-                        } else if (JenisPilihan == "Motor") {
+                        } else if (JenisPilihan.equals("Motor")) {
                             Bobot = 1.0;
                         } else {
                             Bobot = 1.3;
