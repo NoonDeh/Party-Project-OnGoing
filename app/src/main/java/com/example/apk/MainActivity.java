@@ -23,11 +23,12 @@ public class MainActivity extends AppCompatActivity {
     }
     public void Submit (View view) {
         EditText InputCC = findViewById(R.id.InputCC);
-        EditText InputHarga = findViewById(R.id.editharga);
+        EditText InputPajakSTNK = findViewById(R.id.InputPajakSTNK);
         EditText InputUsiaKendaraan = findViewById(R.id.editusia);
         TextView Hasilpkb = findViewById(R.id.hasilpkb);
         TextView HasilSWDKLLJ = findViewById(R.id.SWDKLLJ);
         TextView HasilSertif = findViewById(R.id.Sertif);
+        TextView hasilAdministrasi = findViewById(R.id.Administrasi);
         TextView HasilTotal = findViewById(R.id.hasilTotal);
 
         Double Bobot = 0.0;
@@ -51,36 +52,53 @@ public class MainActivity extends AppCompatActivity {
             double TarifPajakDaerah = 0.02;
 
             int cc = Integer.parseInt(InputCC.getText().toString().trim());
-            double PajakSTNK = Double.parseDouble(InputHarga.getText().toString().trim());
+            double PajakSTNK = Double.parseDouble(InputPajakSTNK.getText().toString().trim());
             int usiaKendaraan = Integer.parseInt(InputUsiaKendaraan.getText().toString().trim());
-            double njkb = (PajakSTNK / TarifPajakDaerah) * 2; //Contoh pajak daerah = 2%. krn bnyk & berbeda tiap daerah
+            double awalnjkb = (PajakSTNK / TarifPajakDaerah) * 2; //Contoh pajak daerah = 2%. krn bnyk & berbeda tiap daerah
+
+
+            double penguranganUsiaK = 0;
+
+            for (int i = 1; i <= usiaKendaraan; i++ ) {
+                penguranganUsiaK = 0.05;
+            }
+
+            if (penguranganUsiaK > 0.5) {
+                penguranganUsiaK = 0.5;
+            }
+
+            double njkb = awalnjkb - (awalnjkb * penguranganUsiaK);
             double pkbPokok = njkb * Bobot * TarifPajakDaerah; //sm sprt sebelumnya tarif pajak daerah = 2%
 
 
-            int swdkllj = 0;
-            if (cc <= 250 && JenisPilihan == "Motor") {
+            int swdkllj = 5000;
+            if (cc <= 250 && JenisPilihan.equals("Motor")) {
                 swdkllj = 35000;
-            } else if (cc > 250 && JenisPilihan == "Motor") {
+            } else if (cc > 250 && JenisPilihan.equals("Motor")) {
                 swdkllj = 80000;
-            } else if (cc < 2400 && JenisPilihan == "Mobil") {
+            } else if (cc < 2400 && JenisPilihan.equals("Mobil")) {
                 swdkllj = 70000;
-            } else if (cc > 2400 && JenisPilihan == "Mobil") {
+            } else if (cc > 2400 && JenisPilihan.equals("Mobil")) {
                 swdkllj = 140000;
+            } else {
+                swdkllj = 0;
             }
 
-            int Total_swdkllj = swdkllj + 3000;
+            int sertif = 3000;
 
-            // 3. Biaya Administrasi / Sertifikat / Pengesahan STNK (Contoh flat)
+            int Total_swdkllj = swdkllj + sertif;
+
             int biayaAdministrasi = 50000;
 
-            // 4. Total Pajak Kendaraan
             double PKBtotal = pkbPokok + swdkllj + biayaAdministrasi;
 
-            // Tampilkan hasil ke TextView
-            Hasilpkb.setText("PKB Pokok: Rp " + String.format("%,.0f", pkbPokok));
-            HasilSWDKLLJ.setText("SWDKLLJ: Rp " + String.format("%,d", swdkllj));
-            HasilSertif.setText("Admin/Sertifikat: Rp " + String.format("%,d", biayaAdministrasi));
-            HasilTotal.setText("Total Pajak: Rp " + String.format("%,.0f", PKBtotal));
+            Hasilpkb.setText("Rp " + String.format("%,.0f", pkbPokok));
+            HasilSWDKLLJ.setText("Rp " + String.format("%,d", swdkllj));
+            hasilAdministrasi.setText("Rp " + String.format("%,d", biayaAdministrasi));
+            HasilSertif.setText("Rp " + String.format("%,d", sertif));
+            HasilTotal.setText("Rp " + String.format("%,.0f", PKBtotal));
+
+            Toast.makeText(this, "Estimasi bayar : Rp" + String.format("%,.0f", PKBtotal), Toast.LENGTH_SHORT).show();
 
         } else {
             Toast.makeText(this, "Pilih Jenis Kendaraan Terlebih dahulu", Toast.LENGTH_SHORT).show();

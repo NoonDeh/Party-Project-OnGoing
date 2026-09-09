@@ -29,6 +29,7 @@
         android:textStyle="bold" />
 
     <RadioGroup
+        android:id="@+id/JenisKendaraan"
         android:layout_width="match_parent"
         android:layout_height="99dp">
 
@@ -57,7 +58,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/icck"
+        android:id="@+id/InputCC"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:ems="10"
@@ -65,7 +66,7 @@
         android:inputType="numberSigned" />
 
     <TextView
-        android:id="@+id/pjstnk"
+        android:id="@+id/pjkstnk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/ps"
@@ -73,7 +74,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/ipjstnk"
+        android:id="@+id/InputPajakSTNK"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:ems="10"
@@ -89,7 +90,7 @@
         android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/iusk"
+        android:id="@+id/editusia"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:ems="10"
@@ -105,7 +106,8 @@
         android:text="@string/pkb" />
 
     <TextView
-        android:id="@+id/ipkbp"
+        android:id="@+id/hasilpkb"
+        android:gravity="center_vertical|right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -118,8 +120,9 @@
         android:text="@string/sw" />
 
     <TextView
-        android:id="@+id/iswd"
+        android:id="@+id/SWDKLLJ"
         android:layout_width="match_parent"
+        android:gravity="center_vertical|right"
         android:layout_height="wrap_content" />
 
     <TextView
@@ -131,7 +134,8 @@
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/ibad"
+        android:id="@+id/Administrasi"
+        android:gravity="center_vertical|right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -144,7 +148,8 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/isod"
+        android:id="@+id/Sertif"
+        android:gravity="center_vertical|right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -157,8 +162,11 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/itotal"
+        android:id="@+id/hasilTotal"
         android:layout_width="match_parent"
+        android:textSize="30sp"
+        android:gravity="center_vertical|right"
+        android:text=""
         android:layout_height="91dp" />
 
     <Button
@@ -167,6 +175,6 @@
         android:layout_height="wrap_content"
         android:text="@string/sub"
         android:backgroundTint="@color/grey"
-        android:onClick=""/>
+        android:onClick="Submit"/>
 
 </LinearLayout>
