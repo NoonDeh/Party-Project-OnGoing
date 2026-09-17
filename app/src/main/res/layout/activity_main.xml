@@ -1,215 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:fillViewport="true"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/judul"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="@string/ap"
-        android:background="@color/green"
-        android:textColor="@color/Teks"
-        android:textStyle="bold"
-        android:textSize="25sp"
-        android:textAlignment="center"
-        />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
+        <!-- Judul -->
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_marginBottom="16dp"
+            android:text="Sistem Pembayaran Parkir"
+            android:textColor="#6A1B9A"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <!-- Card Input -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
 
             <LinearLayout
-                android:id="@+id/BagianInputPengguna"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/nama"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/cc"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/InputNama"
-                            android:layout_width="match_parent"
-                            android:layout_height="48dp"
-                            android:ems="10"
-                            android:hint="@string/c"
-                            android:inputType="numberSigned"
-                            android:maxLength="5" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/jenis"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/jk"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <RadioGroup
-                        android:id="@+id/JenisKendaraan"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/mobil"
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/m"
-                            android:textStyle="bold" />
-
-                        <RadioButton
-                            android:id="@+id/motor"
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/mt"
-                            android:textStyle="bold" />
-                    </RadioGroup>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/platnmr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ps"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/InputPlatNomor"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:ems="10"
-                        android:hint="@string/p"
-                        android:inputType="numberSigned" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/usk"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/uk"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/inputMerek"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:ems="10"
-                        android:hint="@string/u"
-                        android:inputType="numberSigned"
-                        android:maxLength="3" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/waktu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Waktu Parkir"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <Button
-                            android:id="@+id/buttonkurang"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:textSize="25sp"
-                            android:text="-"
-                            android:onClick="Kurang_waktu"/>
-
-                        <EditText
-                            android:id="@+id/InputWaktu"
-                            android:layout_width="100dp"
-                            android:layout_height="50dp"
-                            android:textAlignment="center"
-                            android:hint="waktu"
-                            android:ems="10"
-                            android:inputType="number" />
-
-                        <Button
-                            android:id="@+id/buttontambah"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:textSize="20sp"
-                            android:text="+"
-                            android:onClick="Tambah_waktu"/>
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/submit"
+                <EditText
+                    android:id="@+id/InputNama"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/green"
-                    android:text="@string/sub" />
+                    android:layout_marginBottom="8dp"
+                    android:hint="Nama Pengguna / Pemilik"
+                    android:inputType="textPersonName" />
 
+                <EditText
+                    android:id="@+id/InputNomorPlat"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="8dp"
+                    android:hint="Nomor Plat Kendaraan (cth: AD 1234 AB)"
+                    android:inputType="textCapCharacters" />
+
+                <EditText
+                    android:id="@+id/InputMerkKendaraan"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="12dp"
+                    android:hint="Merk Kendaraan (cth: Honda Vario)"
+                    android:inputType="text" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="Pilih Jenis Kendaraan:"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/JenisKendaraan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/Motor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sepeda Motor" />
+
+                    <RadioButton
+                        android:id="@+id/Mobil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="Mobil" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/Kurang_waktu"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="-"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:onClick="Kurang_waktu"/>
+
+                    <EditText
+                        android:id="@+id/InputJam"
+                        android:layout_width="150dp"
+                        android:layout_height="60dp"
+                        android:layout_marginBottom="16dp"
+                        android:hint="Lama Parkir (Jam, maks 36)"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:maxLength="2" />
+
+                    <Button
+                        android:id="@+id/Tambah_waktu"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="+"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:onClick="Tambah_waktu"/>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/Bayar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#6A1B9A"
+                    android:onClick="prosesPembayaran"
+                    android:text="PROSES PEMBAYARAN"
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
+        <LinearLayout
+            android:id="@+id/LayoutKarcis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/JudulKarcis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Ringkasan Karcis Parkir"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/KarcisNama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama Pengguna: -"
+                android:textColor="#555555" />
+
+            <TextView
+                android:id="@+id/KarcisKendaraan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Kendaraan: -"
+                android:textColor="#555555" />
+
+            <TextView
+                android:id="@+id/KarcisTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Total Bayar: Rp 0"
+                android:textColor="#1A237E"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
-    </ScrollView>
-
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
