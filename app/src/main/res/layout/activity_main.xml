@@ -21,205 +21,195 @@
         android:textAlignment="center"
         />
 
-    <LinearLayout
-        android:id="@+id/BagianInputPengguna"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/jenis"
+            <LinearLayout
+                android:id="@+id/BagianInputPengguna"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/jk"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <RadioGroup
-                android:id="@+id/JenisKendaraan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/mobil"
-                    android:layout_width="150dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/m"
-                    android:textStyle="bold" />
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <RadioButton
-                    android:id="@+id/motor"
-                    android:layout_width="150dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/nama"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cc"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/InputNama"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:ems="10"
+                            android:hint="@string/c"
+                            android:inputType="numberSigned"
+                            android:maxLength="5" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/jenis"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/jk"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/JenisKendaraan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/mobil"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/m"
+                            android:textStyle="bold" />
+
+                        <RadioButton
+                            android:id="@+id/motor"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/mt"
+                            android:textStyle="bold" />
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/mt"
-                    android:textStyle="bold" />
-            </RadioGroup>
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/platnmr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ps"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/InputPlatNomor"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:ems="10"
+                        android:hint="@string/p"
+                        android:inputType="numberSigned" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/usk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uk"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/inputMerek"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:ems="10"
+                        android:hint="@string/u"
+                        android:inputType="numberSigned"
+                        android:maxLength="3" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/waktu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Waktu Parkir"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/buttonkurang"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:textSize="25sp"
+                            android:text="-"
+                            android:onClick="Kurang_waktu"/>
+
+                        <EditText
+                            android:id="@+id/InputWaktu"
+                            android:layout_width="100dp"
+                            android:layout_height="50dp"
+                            android:textAlignment="center"
+                            android:hint="waktu"
+                            android:ems="10"
+                            android:inputType="number" />
+
+                        <Button
+                            android:id="@+id/buttontambah"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:textSize="20sp"
+                            android:text="+"
+                            android:onClick="Tambah_waktu"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/green"
+                    android:text="@string/sub" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/cck"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/cc"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/InputCC"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:ems="10"
-                android:hint="@string/c"
-                android:inputType="numberSigned"
-                android:maxLength="5" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/pjkstnk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/ps"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/InputPajakSTNK"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:ems="10"
-                android:hint="@string/p"
-                android:inputType="numberSigned" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/usk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/uk"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/editusia"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:ems="10"
-                android:hint="@string/u"
-                android:inputType="numberSigned"
-                android:maxLength="3" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/pkbp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/hasilpkb"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|right" />
-
-        <TextView
-            android:id="@+id/swd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/SWDKLLJ"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|right" />
-
-        <TextView
-            android:id="@+id/bad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/Administrasi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|right" />
-
-        <TextView
-            android:id="@+id/sod"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/Sertif"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|right" />
-
-        <TextView
-            android:id="@+id/total"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/hasilTotal"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:gravity="center_vertical|right"
-            android:text=""
-            android:textColor="@color/clear"
-            android:textSize="30sp" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/green"
-        android:onClick="Submit"
-        android:text="@string/sub" />
+    </ScrollView>
 
 </LinearLayout>
