@@ -1,7 +1,9 @@
 package com.example.apk;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.method.DialerKeyListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -96,6 +98,8 @@ int totalBayar;
                                                 KarcisNama.setText("Nama Pengguna: " + nama);
                                                 KarcisKendaraan.setText("Kendaraan: " + jenisPilihan + " - " + merk + " (" + plat + ")");
                                                 KarcisTotal.setText("Total Bayar: Rp " + String.format(java.util.Locale.GERMANY, "%,d", totalBayar));
+                                                AlertDialog dialog = createDialog();
+                                                dialog.show();
 
                                                 Toast.makeText(MainActivity.this, "Total Bayar : Rp" + String.format(java.util.Locale.GERMANY,"%,d", totalBayar), Toast.LENGTH_SHORT).show();
                                             } else {
@@ -134,13 +138,21 @@ int totalBayar;
 
     }
 
+
+
+
+
     AlertDialog createDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Nama Pengguna: " + nama);
-        builder.setMessage("Kendaraan: " + jenisPilihan + " - " + merk + " (" + plat + ")");
-        builder.setMessage("Total Bayar: Rp " + String.format(java.util.Locale.GERMANY, "%,d", totalBayar));
-        builder.setMessage("");
-        return null; }
+        builder.setTitle("Total Pembayaran");
+        builder.setMessage("Nama Pengguna: " + nama + "\n\n" + "Kendaraan: " + jenisPilihan + " - " + merk + " (" + plat + ")" + "\n\n" + "Total Bayar: Rp " + String.format(java.util.Locale.GERMANY, "%,d", totalBayar ));
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        return builder.create(); }
 
 
     int count = 0;
