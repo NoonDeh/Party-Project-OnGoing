@@ -1,153 +1,195 @@
-package com.example.apk; // SESUAIKAN DENGAN NAMA PACKAGE KAMU
+package com.example.apk; // Menentukan lokasi package aplikasi
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
+// Mengimpor library Android yang dibutuhkan
+import android.app.AlertDialog; // Kelas untuk membuat jendela Pop-Up Dialog
+import android.os.Bundle; // Kelas untuk menyimpan status data aktivitas
+import android.view.View; // Kelas umum untuk penanganan tampilan UI
+import android.widget.EditText; // Komponen input teks
+import android.widget.RadioButton; // Komponen pilihan radio button
+import android.widget.RadioGroup; // Komponen grup radio button
+import android.widget.TextView; // Komponen penampil teks
+import android.widget.Toast; // Komponen penampil pesan singkat (Toast)
+import androidx.appcompat.app.AppCompatActivity; // Kelas dasar untuk activity modern
+import androidx.appcompat.app.AppCompatDelegate; // Kelas pengatur tema/mode aplikasi
+
+import java.util.Locale; // Library format bahasa/negara (dipakai untuk format angka Rupiah)
 
 public class MainActivity extends AppCompatActivity {
 
-    // Deklarasi TextInputLayout (Error Handling)
-    private TextInputLayout tilNamaPengguna, tilMerkKendaraan, tilNomorPlat, tilLamaParkir;
-
-    // Deklarasi TextInputEditText
-    private TextInputEditText etNamaPengguna, etMerkKendaraan, etNomorPlat, etLamaParkir;
-
-    // Deklarasi Komponen Pilihan & Tombol
-    private RadioGroup rgJenisKendaraan;
-    private RadioButton rbMotor;
-    private Button btnBayar;
+    // Variable global untuk menyimpan nilai hitungan lama parkir
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Memaksa aplikasi selalu memakai mode terang agar tidak gelap saat HP dalam Dark Mode
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         super.onCreate(savedInstanceState);
+        // Menghubungkan file Java ini dengan layout XML utamanya
         setContentView(R.layout.activity_main);
-
-        // Inisialisasi TextInputLayout
-        tilNamaPengguna = findViewById(R.id.tilNamaPengguna);
-        tilMerkKendaraan = findViewById(R.id.tilMerkKendaraan);
-        tilNomorPlat = findViewById(R.id.tilNomorPlat);
-        tilLamaParkir = findViewById(R.id.tilLamaParkir);
-
-        // Inisialisasi TextInputEditText
-        etNamaPengguna = findViewById(R.id.etNamaPengguna);
-        etMerkKendaraan = findViewById(R.id.etMerkKendaraan);
-        etNomorPlat = findViewById(R.id.etNomorPlat);
-        etLamaParkir = findViewById(R.id.etLamaParkir);
-
-        // Inisialisasi Pilihan & Tombol
-        rgJenisKendaraan = findViewById(R.id.rgJenisKendaraan);
-        rbMotor = findViewById(R.id.rbMotor);
-        btnBayar = findViewById(R.id.btnBayar);
-
-        // Aksi Tombol Proses Pembayaran
-        btnBayar.setOnClickListener(v -> prosesDataValidasi());
     }
 
-    private void prosesDataValidasi() {
-        // Ambil data teks input
-        String nama = etNamaPengguna.getText().toString().trim();
-        String merk = etMerkKendaraan.getText().toString().trim();
-        String plat = etNomorPlat.getText().toString().trim();
-        String lamaStr = etLamaParkir.getText().toString().trim();
+    // Method yang dipanggil saat tombol (-) diklik
+    public void Kurang_waktu(View view) {
+        // Menghubungkan ke EditText jam di XML
+        EditText InputJam = findViewById(R.id.InputJam);
+        
+        if (InputJam == null) return;
 
-        boolean isValid = true;
-
-        // 1. Validasi Nama Pengguna (Tidak boleh kosong & harus huruf)
-        if (nama.isEmpty()) {
-            tilNamaPengguna.setError("Nama pengguna tidak boleh kosong!");
-            isValid = false;
-        } else if (!nama.matches("[a-zA-Z\\s]+")) {
-            tilNamaPengguna.setError("Nama hanya boleh berisi huruf!");
-            isValid = false;
+        // Jika hitungan lebih dari 0, kurangi 1
+        if (count > 0) {
+            count = count - 1;
         } else {
-            tilNamaPengguna.setError(null);
+            // Jika sudah 0, tahan agar tidak menjadi minus
+            count = 0;
         }
 
-        // 2. Validasi Merk Kendaraan
-        if (merk.isEmpty()) {
-            tilMerkKendaraan.setError("Merk kendaraan wajib diisi!");
-            isValid = false;
+        // Tampilkan angka terbaru ke dalam EditText
+        InputJam.setText(String.valueOf(count));
+    }
+
+    // Method yang dipanggil saat tombol (+) diklik
+    public void Tambah_waktu(View view) {
+        // Menghubungkan ke EditText jam di XML
+        EditText InputJam = findViewById(R.id.InputJam);
+        
+        if (InputJam == null) return;
+
+        // Jika hitungan sudah 36 atau lebih, kunci di angka 36 (Maksimal)
+        if (count >= 36) {
+            count = 36;
         } else {
-            tilMerkKendaraan.setError(null);
+            // Jika belum mencapai 36, tambahkan 1
+            count++;
         }
 
-        // 3. Validasi Nomor Plat (Format Plat Indonesia)
-        if (plat.isEmpty()) {
-            tilNomorPlat.setError("Nomor plat wajib diisi!");
-            isValid = false;
-        } else if (!plat.matches("^[A-Z]{1,2}\\s?\\d{1,4}\\s?[A-Z]{1,3}$")) {
-            tilNomorPlat.setError("Format plat salah! (Cth: AD 1234 AB)");
-            isValid = false;
-        } else {
-            tilNomorPlat.setError(null);
+        // Tampilkan angka terbaru ke dalam EditText
+        InputJam.setText(String.valueOf(count));
+    }
+
+    // Method utama yang dipanggil saat tombol "PROSES PEMBAYARAN" diklik
+    public void prosesPembayaran(View view) {
+
+        // Inisialisasi komponen-komponen input dari XML
+        EditText InputNama = findViewById(R.id.InputNama);
+        EditText InputNomorPlat = findViewById(R.id.InputNomorPlat);
+        EditText InputMerkKendaraan = findViewById(R.id.InputMerkKendaraan);
+        EditText InputJam = findViewById(R.id.InputJam);
+        RadioGroup JnsKnd = findViewById(R.id.JenisKendaraan);
+        
+        if (InputNama == null || InputNomorPlat == null || InputMerkKendaraan == null || 
+            InputJam == null || JnsKnd == null) {
+            Toast.makeText(this, "Error: Komponen UI tidak ditemukan", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        // 4. Validasi Lama Parkir
-        int n = 0; // Lama parkir dalam jam (n)
-        if (lamaStr.isEmpty()) {
-            tilLamaParkir.setError("Lama parkir wajib diisi!");
-            isValid = false;
-        } else {
-            try {
-                n = Integer.parseInt(lamaStr);
-                if (n <= 0) {
-                    tilLamaParkir.setError("Minimal lama parkir adalah 1 jam!");
-                    isValid = false;
+        // Mengambil isi teks inputan dan menghapus spasi di awal/akhir
+        String nama = InputNama.getText().toString().trim();
+        String plat = InputNomorPlat.getText().toString().trim();
+        String merk = InputMerkKendaraan.getText().toString().trim();
+        String jamString = InputJam.getText().toString().trim();
+        // Mendapatkan ID dari RadioButton yang sedang dipilih
+        int HasilPilihJenisKendaraan = JnsKnd.getCheckedRadioButtonId();
+
+        // Deklarasi variabel pembatas dan harga tarif
+        int maksJamParkir = 36;
+        int tarifAwal;
+        int tarifLanjutan;
+        int tarifMaks;
+
+        // Validasi Bertingkat (If-Else)
+        // 1. Cek apakah Nama tidak kosong
+        if (!nama.isEmpty()) {
+            // 2. Cek apakah Plat Nomor tidak kosong
+            if (!plat.isEmpty()) {
+                // 3. Cek apakah Merk Kendaraan tidak kosong
+                if (!merk.isEmpty()) {
+                    // 4. Cek apakah Lama Parkir tidak kosong
+                    if (!jamString.isEmpty()) {
+                        // Mengubah teks input jam menjadi tipe angka (Integer)
+                        int jam = Integer.parseInt(jamString);
+                        // 5. Cek apakah jam lebih dari 0
+                        if (jam > 0) {
+                            // 6. Cek apakah jam tidak melebihi batas maksimal (36 jam)
+                            if (jam <= maksJamParkir) {
+                                // 7. Cek apakah jenis kendaraan sudah dipilih (tidak bernilai -1)
+                                if (HasilPilihJenisKendaraan != -1) {
+
+                                    // Mengambil elemen RadioButton yang dipilih
+                                    RadioButton PilihanRadioButton = findViewById(HasilPilihJenisKendaraan);
+                                    String jenisPilihan = PilihanRadioButton.getText().toString();
+
+                                    // Hitung tarif berdasarkan jenis kendaraan
+                                    if (jenisPilihan.equals("Mobil")) {
+                                        tarifAwal = 10000;      // Tarif jam pertama Mobil
+                                        tarifLanjutan = 5000;   // Tarif jam berikutnya Mobil
+                                        tarifMaks = 30000;      // Batas tarif maksimal Mobil
+                                    } else {
+                                        tarifAwal = 5000;       // Tarif jam pertama Motor
+                                        tarifLanjutan = 2000;   // Tarif jam berikutnya Motor
+
+                                    }
+
+                                    // Rumus Hitung Total Bayar: Tarif Awal + (Tarif Lanjutan x (Total Jam - 1))
+                                    int totalBayar = tarifAwal;
+                                    if (jam > 1) {
+                                        totalBayar += tarifLanjutan * (jam - 1);
+                                    }
+
+
+
+
+                                    // --- PROSES MENAMPILKAN HASIL PADA POP UP DIALOG ---
+
+                                    // 1. Inflate / tiup layout XML 'dialog_karcis' menjadi objek View
+                                    View dialogView = getLayoutInflater().inflate(R.layout.dialog_karcis, null);
+
+                                    // 2. Hubungkan elemen TextView yang ada di dalam layout dialog_karcis.xml
+                                    TextView JudulKarcis = dialogView.findViewById(R.id.JudulKarcis);
+                                    TextView KarcisNama = dialogView.findViewById(R.id.KarcisNama);
+                                    TextView KarcisKendaraan = dialogView.findViewById(R.id.KarcisKendaraan);
+                                    TextView KarcisTotal = dialogView.findViewById(R.id.KarcisTotal);
+
+                                    // 3. Masukkan data hasil perhitungan ke dalam TextView Pop-Up
+                                    JudulKarcis.setText("RINGKASAN KARCIS PARKIR");
+                                    KarcisNama.setText("Nama Pengguna: " + nama);
+                                    KarcisKendaraan.setText("Kendaraan: " + jenisPilihan + " - " + merk + " (" + plat + ")");
+                                    KarcisTotal.setText("Total Bayar: Rp " + String.format(Locale.GERMANY, "%,d", totalBayar));
+
+                                    // 4. Buat dan tampilkan Jendela Pop-Up Dialog
+                                    new AlertDialog.Builder(this)
+                                            .setView(dialogView) // Set tampilan dialog memakai dialogView
+                                            .setPositiveButton("TUTUP", (dialog, which) -> dialog.dismiss()) // Tombol untuk menutup dialog
+                                            .create() // Membuat objek dialog
+                                            .show(); // Menampilkan ke layar
+
+                                } else {
+                                    // Pesan jika belum memilih jenis kendaraan
+                                    Toast.makeText(this, "Silahkan Pilih Jenis Kendaraan Terlebih Dahulu", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                // Pesan jika jam parkir melebihi 36 jam
+                                Toast.makeText(this, "Lama Parkir Maksimal " + maksJamParkir + " Jam!", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            // Pesan jika jam dimasukkan angka 0
+                            Toast.makeText(this, "Jam tidak boleh 0(nol)!", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        // Pesan jika jam parkir belum diisi
+                        Toast.makeText(this, "Masukan Lama Parkir Terlebih dahulu!", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    tilLamaParkir.setError(null);
+                    // Pesan jika merk kendaraan belum diisi
+                    Toast.makeText(this, "Masukan Merek Kendaraan Terlebih Dahulu!", Toast.LENGTH_SHORT).show();
                 }
-            } catch (NumberFormatException e) {
-                tilLamaParkir.setError("Input jam tidak valid!");
-                isValid = false;
+            } else {
+                // Pesan jika plat nomor belum diisi
+                Toast.makeText(this, "Masukan Nomor Plat Terlebih dahulu!", Toast.LENGTH_SHORT).show();
             }
+        } else {
+            // Pesan jika nama pengguna belum diisi
+            Toast.makeText(this, "Masukan Nama Pengguna Terlebih Dahulu!", Toast.LENGTH_SHORT).show();
         }
-
-        // Jika semua input lolos validasi (Tidak ada error)
-        if (isValid) {
-            String jenisKendaraan = rbMotor.isChecked() ? "Sepeda Motor" : "Mobil";
-
-            /* LOGIKA DERET ARITMATIKA (Sn)
-             * Motor : Jam ke-1 (a) = 3000, Beda kenaikan per jam (b) = 1000
-             * Mobil : Jam ke-1 (a) = 5000, Beda kenaikan per jam (b) = 2000
-             */
-            int a = rbMotor.isChecked() ? 3000 : 5000;
-            int b = rbMotor.isChecked() ? 1000 : 2000;
-
-            // Rumus Sn = (n / 2) * (2a + (n - 1)b)
-            int totalBayar = (n * (2 * a + (n - 1) * b)) / 2;
-
-            // PANGGIL POP UP DIALOG
-            tampilkanPopUpKarcis(nama, jenisKendaraan, merk, plat, totalBayar);
-        }
-    }
-
-    // Method khusus untuk menampilkan Jendela Pop Up Karcis
-    private void tampilkanPopUpKarcis(String nama, String jenis, String merk, String plat, int total) {
-        // 1. Inflate / tiup layout dialog_karcis.xml menjadi bentuk View
-        View dialogView = getLayoutInflater().inflate(R.layout.dialog_karcis, null);
-
-        // 2. Hubungkan TextView yang ada di dalam layout dialog_karcis.xml
-        TextView KarcisNama = dialogView.findViewById(R.id.KarcisNama);
-        TextView KarcisKendaraan = dialogView.findViewById(R.id.KarcisKendaraan);
-        TextView KarcisTotal = dialogView.findViewById(R.id.KarcisTotal);
-
-        // 3. Set text hasil perhitungan ke komponen Pop Up Dialog
-        KarcisNama.setText("Nama Pengguna: " + nama);
-        KarcisKendaraan.setText("Kendaraan: " + jenis + " (" + merk + " - " + plat.toUpperCase() + ")");
-        KarcisTotal.setText("Total Bayar: Rp " + String.format("%,d", total).replace(',', '.'));
-
-        // 4. Buat dan Tampilkan AlertDialog Pop Up
-        new AlertDialog.Builder(MainActivity.this)
-                .setView(dialogView)
-                .setPositiveButton("TUTUP / CETAK", (dialog, which) -> dialog.dismiss())
-                .create()
-                .show();
     }
 }

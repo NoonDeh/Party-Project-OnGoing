@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- LinearLayout Utama Pop Up: Berfungsi sebagai kontainer isi jendela dialog -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/LayoutKarcis"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="#FFFFFF"
+    android:orientation="vertical"
     android:padding="20dp">
 
+    <!-- TextView: Judul Karcis pada Pop-Up Dialog -->
     <TextView
         android:id="@+id/JudulKarcis"
         android:layout_width="match_parent"
@@ -17,6 +19,7 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
+    <!-- TextView: Menampilkan hasil inputan Nama Pengguna -->
     <TextView
         android:id="@+id/KarcisNama"
         android:layout_width="match_parent"
@@ -25,6 +28,7 @@
         android:textColor="#212121"
         android:textSize="14sp" />
 
+    <!-- TextView: Menampilkan rincian Kendaraan (Jenis, Merk, Plat) -->
     <TextView
         android:id="@+id/KarcisKendaraan"
         android:layout_width="match_parent"
@@ -34,6 +38,7 @@
         android:textColor="#212121"
         android:textSize="14sp" />
 
+    <!-- TextView: Menampilkan hasil hitung Total Bayar -->
     <TextView
         android:id="@+id/KarcisTotal"
         android:layout_width="match_parent"

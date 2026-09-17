@@ -1,173 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ScrollView: Memungkinkan seluruh isi layar bisa di-scroll jika dijalankan di HP layar kecil -->
+<!-- ScrollView: Mengizinkan seluruh elemen layar bisa di-scroll jika dijalankan di layar HP kecil -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="#F8F9FA"
     tools:context=".MainActivity">
 
-    <!-- LinearLayout (Parent): Menata seluruh elemen UI secara vertikal -->
+    <!-- LinearLayout Utama: Menyusun komponen form dari atas ke bawah secara vertikal -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="16dp">
 
-        <!-- TextView Header Title: Judul utama aplikasi -->
+        <!-- TextView: Judul Utama Aplikasi -->
         <TextView
-            android:id="@+id/tvHeaderTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:text="Sistem Pembayaran Parkir"
-            android:textColor="#1A237E"
+            android:textColor="#6A1B9A"
             android:textSize="22sp"
             android:textStyle="bold" />
 
-        <!-- TextView Header Subtitle: Keterangan aplikasi -->
-        <TextView
-            android:id="@+id/tvHeaderSubtitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="20dp"
-            android:text="Hitung tarif progresif dengan Deret Aritmatika"
-            android:textColor="#666666"
-            android:textSize="14sp" />
-
-        <!-- MaterialCardView (Form): Wadah berbentuk kartu untuk input form -->
+        <!-- MaterialCardView: Kartu wadah untuk mengelompokkan input form -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            app:strokeColor="#E0E0E0"
-            app:strokeWidth="1dp">
+            app:cardElevation="4dp">
 
+            <!-- LinearLayout Di Dalam Card: Menampung elemen form input -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- 1. Input Nama Pengguna -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilNamaPengguna"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:hint="Nama Pengguna / Pemilik"
-                    app:errorEnabled="true">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etNamaPengguna"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:maxLines="1" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- 2. Input Merk Kendaraan -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilMerkKendaraan"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:hint="Merk Kendaraan (cth: Honda Vario, NMAX)"
-                    app:errorEnabled="true">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etMerkKendaraan"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textCapWords"
-                        android:maxLines="1" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- 3. Input Nomor Plat Kendaraan -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilNomorPlat"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:hint="Nomor Plat (cth: AD 1234 AB)"
-                    app:errorEnabled="true">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etNomorPlat"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textCapCharacters"
-                        android:maxLines="1" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- 4. Pilihan Jenis Kendaraan -->
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Pilih Jenis Kendaraan:"
-                    android:textColor="#333333"
-                    android:textSize="14sp"
+                    android:layout_marginBottom="4dp"
+                    android:text="Nama pemilik :"
                     android:textStyle="bold" />
 
-                <RadioGroup
-                    android:id="@+id/rgJenisKendaraan"
+
+                <!-- EditText: Input Nama Pengguna -->
+                <EditText
+                    android:id="@+id/InputNama"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="8dp"
+                    android:hint="Nama Pengguna / Pemilik"
+                    android:inputType="textPersonName" />
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="nomor plat kendaraan :"
+                    android:textStyle="bold" />
+
+
+                <!-- EditText: Input Nomor Plat Kendaraan -->
+                <EditText
+                    android:id="@+id/InputNomorPlat"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="8dp"
+                    android:hint="Nomor Plat Kendaraan (cth: AD 1234 AB)"
+                    android:inputType="textCapCharacters" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="merk kendaraan :"
+                    android:textStyle="bold" />
+
+
+                <!-- EditText: Input Merk Kendaraan -->
+                <EditText
+                    android:id="@+id/InputMerkKendaraan"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="12dp"
+                    android:hint="Merk Kendaraan (cth: Honda Vario)"
+                    android:inputType="text" />
+
+                <!-- TextView: Label Pilihan Jenis Kendaraan -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="Pilih Jenis Kendaraan:"
+                    android:textStyle="bold" />
+
+                <!-- RadioGroup: Wadah pilihan opsi radio button (Motor / Mobil) -->
+                <RadioGroup
+                    android:id="@+id/JenisKendaraan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
                     android:orientation="horizontal">
 
+                    <!-- RadioButton: Pilihan Sepeda Motor -->
                     <RadioButton
-                        android:id="@+id/rbMotor"
-                        android:layout_width="0dp"
+                        android:id="@+id/Motor"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:checked="true"
                         android:text="Sepeda Motor" />
 
+                    <!-- RadioButton: Pilihan Mobil -->
                     <RadioButton
-                        android:id="@+id/rbMobil"
-                        android:layout_width="0dp"
+                        android:id="@+id/Mobil"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_marginStart="24dp"
                         android:text="Mobil" />
                 </RadioGroup>
 
-                <!-- 5. Input Lama Parkir -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilLamaParkir"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <!-- LinearLayout Horizontal: Baris penyusun tombol counter waktu (-) dan (+) -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:hint="Lama Parkir (Jam)"
-                    app:errorEnabled="true">
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:orientation="horizontal">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etLamaParkir"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                    <!-- Button: Tombol Kurangi Waktu Parkir -->
+                    <Button
+                        android:id="@+id/Kurang_waktu"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:onClick="Kurang_waktu"
+                        android:text="-"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <!-- EditText: Input/Display Angka Lama Parkir -->
+                    <EditText
+                        android:id="@+id/InputJam"
+                        android:layout_width="150dp"
+                        android:layout_height="60dp"
+                        android:layout_marginBottom="16dp"
+                        android:hint="Lama Parkir (Jam, maks 36)"
                         android:inputType="number"
-                        android:maxLines="1" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:maxLength="2"
+                        android:textAlignment="center" />
 
-                <!-- MaterialButton: Tombol untuk memproses data -->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnBayar"
+                    <!-- Button: Tombol Tambah Waktu Parkir -->
+                    <Button
+                        android:id="@+id/Tambah_waktu"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:onClick="Tambah_waktu"
+                        android:text="+"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Button: Tombol Eksekusi Proses Pembayaran -->
+                <Button
+                    android:id="@+id/Bayar"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#6A1B9A"
+                    android:onClick="prosesPembayaran"
                     android:text="PROSES PEMBAYARAN"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="8dp" />
-
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
