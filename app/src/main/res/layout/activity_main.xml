@@ -1,247 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- ScrollView: Memungkinkan seluruh isi layar bisa di-scroll jika dijalankan di HP layar kecil -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:fillViewport="true"
+    android:background="#F8F9FA"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/PembatasNotif"
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:background="@color/greenGelap" />
-
-    <TextView
-        android:id="@+id/judul"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="@string/ap"
-        android:background="@color/green"
-        android:textColor="@color/Teks"
-        android:textStyle="bold"
-        android:textSize="25sp"
-        android:textAlignment="center"
-        />
-
+    <!-- LinearLayout (Parent): Menata seluruh elemen UI secara vertikal -->
     <LinearLayout
-        android:id="@+id/Tampilan"
-        android:background="@color/clear"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <LinearLayout
-            android:id="@+id/BagianInputPengguna"
+        <!-- TextView Header Title: Judul utama aplikasi -->
+        <TextView
+            android:id="@+id/tvHeaderTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
+            android:text="Sistem Pembayaran Parkir"
+            android:textColor="#1A237E"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <!-- TextView Header Subtitle: Keterangan aplikasi -->
+        <TextView
+            android:id="@+id/tvHeaderSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="20dp"
+            android:text="Hitung tarif progresif dengan Deret Aritmatika"
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <!-- MaterialCardView (Form): Wadah berbentuk kartu untuk input form -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:strokeColor="#E0E0E0"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <TextView
-                    android:id="@+id/jenis"
+                <!-- 1. Input Nama Pengguna -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNamaPengguna"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/jk"
-                    android:textSize="20sp"
+                    android:layout_marginBottom="8dp"
+                    android:hint="Nama Pengguna / Pemilik"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNamaPengguna"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- 2. Input Merk Kendaraan -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilMerkKendaraan"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:hint="Merk Kendaraan (cth: Honda Vario, NMAX)"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMerkKendaraan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- 3. Input Nomor Plat Kendaraan -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNomorPlat"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:hint="Nomor Plat (cth: AD 1234 AB)"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNomorPlat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapCharacters"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- 4. Pilihan Jenis Kendaraan -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Pilih Jenis Kendaraan:"
+                    android:textColor="#333333"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <RadioGroup
-                    android:id="@+id/JenisKendaraan"
+                    android:id="@+id/rgJenisKendaraan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_marginBottom="16dp"
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/mobil"
-                        android:layout_width="150dp"
+                        android:id="@+id/rbMotor"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/m"
-                        android:textStyle="bold" />
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="Sepeda Motor" />
 
                     <RadioButton
-                        android:id="@+id/motor"
-                        android:layout_width="150dp"
+                        android:id="@+id/rbMobil"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/mt"
-                        android:textStyle="bold" />
+                        android:layout_weight="1"
+                        android:text="Mobil" />
                 </RadioGroup>
 
+                <!-- 5. Input Lama Parkir -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilLamaParkir"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:hint="Lama Parkir (Jam)"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etLamaParkir"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- MaterialButton: Tombol untuk memproses data -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBayar"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="PROSES PEMBAYARAN"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="8dp" />
+
             </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/cck"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cc"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/InputCC"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:ems="10"
-                    android:hint="@string/c"
-                    android:inputType="numberSigned"
-                    android:maxLength="5" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/pjkstnk"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ps"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/InputPajakSTNK"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:ems="10"
-                    android:hint="@string/p"
-                    android:inputType="numberSigned" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/usk"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/uk"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/editusia"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:ems="10"
-                    android:hint="@string/u"
-                    android:inputType="numberSigned"
-                    android:maxLength="3" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/BagianHasilTampilan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/pkbp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/hasilpkb"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|right" />
-
-                <TextView
-                    android:id="@+id/swd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/SWDKLLJ"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|right" />
-
-                <TextView
-                    android:id="@+id/bad"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/Administrasi"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|right" />
-
-                <TextView
-                    android:id="@+id/sod"
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/Sertif"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|right" />
-
-                <TextView
-                    android:id="@+id/total"
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/hasilTotal"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:gravity="center_vertical|right"
-                    android:text=""
-                    android:textColor="@color/clear"
-                    android:textSize="30sp" />
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/submit"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/green"
-                android:onClick="Submit"
-                android:text="@string/sub" />
-        </LinearLayout>
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

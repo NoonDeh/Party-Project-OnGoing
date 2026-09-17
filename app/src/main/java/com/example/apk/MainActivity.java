@@ -1,162 +1,153 @@
-package com.example.apk;
+package com.example.apk; // SESUAIKAN DENGAN NAMA PACKAGE KAMU
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity {
+
+    // Deklarasi TextInputLayout (Error Handling)
+    private TextInputLayout tilNamaPengguna, tilMerkKendaraan, tilNomorPlat, tilLamaParkir;
+
+    // Deklarasi TextInputEditText
+    private TextInputEditText etNamaPengguna, etMerkKendaraan, etNomorPlat, etLamaParkir;
+
+    // Deklarasi Komponen Pilihan & Tombol
+    private RadioGroup rgJenisKendaraan;
+    private RadioButton rbMotor;
+    private Button btnBayar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Inisialisasi TextInputLayout
+        tilNamaPengguna = findViewById(R.id.tilNamaPengguna);
+        tilMerkKendaraan = findViewById(R.id.tilMerkKendaraan);
+        tilNomorPlat = findViewById(R.id.tilNomorPlat);
+        tilLamaParkir = findViewById(R.id.tilLamaParkir);
 
+        // Inisialisasi TextInputEditText
+        etNamaPengguna = findViewById(R.id.etNamaPengguna);
+        etMerkKendaraan = findViewById(R.id.etMerkKendaraan);
+        etNomorPlat = findViewById(R.id.etNomorPlat);
+        etLamaParkir = findViewById(R.id.etLamaParkir);
+
+        // Inisialisasi Pilihan & Tombol
+        rgJenisKendaraan = findViewById(R.id.rgJenisKendaraan);
+        rbMotor = findViewById(R.id.rbMotor);
+        btnBayar = findViewById(R.id.btnBayar);
+
+        // Aksi Tombol Proses Pembayaran
+        btnBayar.setOnClickListener(v -> prosesDataValidasi());
     }
-    public void Submit (View view) {
-        EditText InputCC = findViewById(R.id.InputCC);
-        EditText InputPajakSTNK = findViewById(R.id.InputPajakSTNK);
-        EditText InputUsiaKendaraan = findViewById(R.id.editusia);
-        TextView Hasilpkb = findViewById(R.id.hasilpkb);
-        TextView HasilSWDKLLJ = findViewById(R.id.SWDKLLJ);
-        TextView HasilSertif = findViewById(R.id.Sertif);
-        TextView hasilAdministrasi = findViewById(R.id.Administrasi);
-        TextView HasilTotal = findViewById(R.id.hasilTotal);
-        TextView Tekspkbp = findViewById(R.id.pkbp);
-        TextView Teksswd = findViewById(R.id.swd);
-        TextView Teksbad = findViewById(R.id.bad);
-        TextView Tekssod = findViewById(R.id.sod);
-        TextView Tekstotal = findViewById(R.id.total);
 
-        String ccString = InputCC.getText().toString().trim();
-        String pjkstnkString = InputPajakSTNK.getText().toString().trim();
-        String usiaString = InputUsiaKendaraan.getText().toString().trim();
+    private void prosesDataValidasi() {
+        // Ambil data teks input
+        String nama = etNamaPengguna.getText().toString().trim();
+        String merk = etMerkKendaraan.getText().toString().trim();
+        String plat = etNomorPlat.getText().toString().trim();
+        String lamaStr = etLamaParkir.getText().toString().trim();
 
+        boolean isValid = true;
 
-        Double Bobot = 0.0;
-
-        RadioGroup JnsKnd = findViewById(R.id.JenisKendaraan);
-        int HasilPilihJenisKendaraan = JnsKnd.getCheckedRadioButtonId();
-
-        if (HasilPilihJenisKendaraan != -1) {
-            if (!ccString.isEmpty() && !ccString.equals("-")) {
-                int cc = Integer.parseInt(InputCC.getText().toString().trim());
-                if (cc > 0) {
-                    if (!pjkstnkString.isEmpty() && !pjkstnkString.equals("-")) {
-                        double PajakSTNK = Double.parseDouble(InputPajakSTNK.getText().toString().trim());
-                        if(PajakSTNK > 0) {
-                            if (!usiaString.isEmpty() && !usiaString.equals("-")) {
-                                int usiaKendaraan = Integer.parseInt(InputUsiaKendaraan.getText().toString().trim());
-                                if(usiaKendaraan  >= 0) {
-
-                                    RadioButton PilihanRadioButton = findViewById(HasilPilihJenisKendaraan);
-                                    String JenisPilihan = PilihanRadioButton.getText().toString();
-
-                                    if (JenisPilihan.equals("Mobil")) {
-                                        Bobot = 1.025;
-                                    } else if (JenisPilihan.equals("Motor")) {
-                                        Bobot = 1.0;
-                                    } else {
-                                        Bobot = 1.3;
-                                    }
-                                    double TarifPajakDaerah = 0.02; // ini pajak daerah 2%
-
-
-                                    double awalnjkb = (PajakSTNK / TarifPajakDaerah); //Contoh pajak daerah = 2%. krn bnyk & berbeda tiap daerah
-
-
-                                    double penguranganUsiaK = 0.0;
-
-                                    if (usiaKendaraan >= 10) {
-                                        penguranganUsiaK = 0.5;
-                                    } else if (usiaKendaraan > 0) {
-                                        penguranganUsiaK = 0.05;
-                                        for (int i = 1; i < usiaKendaraan; i++) {
-                                            if (penguranganUsiaK >= 0.5) {
-                                                penguranganUsiaK = 0.5;
-                                            } else {
-                                                penguranganUsiaK = 0.05 + penguranganUsiaK;
-                                            }
-
-                                        }
-                                    } else {
-                                        penguranganUsiaK = 0.00;
-
-                                    }
-
-                                    double njkb = awalnjkb - (awalnjkb * penguranganUsiaK); //hitung njkb, spt rumus njkb/
-                                    double pkbPokok = njkb * Bobot * TarifPajakDaerah; //sm sprt sebelumnya tarif pajak daerah = 2%
-
-
-                                    int swdkllj = 0;
-                                    if (cc <= 250 && JenisPilihan.equals("Motor")) {
-                                        swdkllj = 35000;
-                                    } else if (cc > 250 && JenisPilihan.equals("Motor")) {
-                                        swdkllj = 80000;
-                                    } else if (cc < 2400 && JenisPilihan.equals("Mobil")) {
-                                        swdkllj = 70000;
-                                    } else if (cc > 2400 && JenisPilihan.equals("Mobil")) {
-                                        swdkllj = 140000;
-                                    } else {
-                                        swdkllj = 0;
-                                    }
-
-                                    int sertif = 3000;
-                                    int Total_swdkllj = swdkllj + sertif;
-                                    int biayaAdministrasi = 50000;
-                                    double PKBtotal = pkbPokok + Total_swdkllj + biayaAdministrasi;
-
-                                    //warnai elemen Total
-                                    int warnaBerhasil_Hijau = ContextCompat.getColor(this, R.color.greenSuccess);
-                                    HasilTotal.setBackgroundColor(warnaBerhasil_Hijau);
-
-                                    //bgn HasilTampil Text
-                                    Tekspkbp.setText("PKB Pokok:");
-                                    Teksswd.setText("SWDKLLJ Pokok");
-                                    Teksbad.setText("Biaya Administrasi:");
-                                    Tekssod.setText("Sertifikat/Dana:");
-                                    Tekstotal.setText("ESTIMASI:");
-
-                                    //bgn HasilTampil Output
-                                    Hasilpkb.setText("Rp " + String.format("%,.0f", pkbPokok));
-                                    HasilSWDKLLJ.setText("Rp " + String.format("%,d", swdkllj));
-                                    hasilAdministrasi.setText("Rp " + String.format("%,d", biayaAdministrasi));
-                                    HasilSertif.setText("Rp " + String.format("%,d", sertif));
-                                    HasilTotal.setText("Rp " + String.format("%,.0f", PKBtotal));
-
-                                    Toast.makeText(this, "Estimasi bayar : Rp" + String.format("%,.0f", PKBtotal), Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(this, "Usia Kendaraan tidak boleh Negatif!", Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                Toast.makeText(this, "Masukan Usia Kendaraan Terlebih dahulu!", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(this, "Pajak STNK tidak boleh 0(nol)!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    else {
-                        Toast.makeText(this, "Masukan Pajak STNK Terlebih dahulu!", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else {
-                    Toast.makeText(this, "CC Kendaraan tidak boleh 0(nol)!", Toast.LENGTH_SHORT).show();
-                }
-            }
-            else {
-                Toast.makeText(this, "Masukan CC Kendaraan Terlebih dahulu!", Toast.LENGTH_SHORT).show();
-            }
+        // 1. Validasi Nama Pengguna (Tidak boleh kosong & harus huruf)
+        if (nama.isEmpty()) {
+            tilNamaPengguna.setError("Nama pengguna tidak boleh kosong!");
+            isValid = false;
+        } else if (!nama.matches("[a-zA-Z\\s]+")) {
+            tilNamaPengguna.setError("Nama hanya boleh berisi huruf!");
+            isValid = false;
         } else {
-            Toast.makeText(this, "Pilih Jenis Kendaraan Terlebih dahulu", Toast.LENGTH_SHORT).show();
+            tilNamaPengguna.setError(null);
         }
 
+        // 2. Validasi Merk Kendaraan
+        if (merk.isEmpty()) {
+            tilMerkKendaraan.setError("Merk kendaraan wajib diisi!");
+            isValid = false;
+        } else {
+            tilMerkKendaraan.setError(null);
+        }
+
+        // 3. Validasi Nomor Plat (Format Plat Indonesia)
+        if (plat.isEmpty()) {
+            tilNomorPlat.setError("Nomor plat wajib diisi!");
+            isValid = false;
+        } else if (!plat.matches("^[A-Z]{1,2}\\s?\\d{1,4}\\s?[A-Z]{1,3}$")) {
+            tilNomorPlat.setError("Format plat salah! (Cth: AD 1234 AB)");
+            isValid = false;
+        } else {
+            tilNomorPlat.setError(null);
+        }
+
+        // 4. Validasi Lama Parkir
+        int n = 0; // Lama parkir dalam jam (n)
+        if (lamaStr.isEmpty()) {
+            tilLamaParkir.setError("Lama parkir wajib diisi!");
+            isValid = false;
+        } else {
+            try {
+                n = Integer.parseInt(lamaStr);
+                if (n <= 0) {
+                    tilLamaParkir.setError("Minimal lama parkir adalah 1 jam!");
+                    isValid = false;
+                } else {
+                    tilLamaParkir.setError(null);
+                }
+            } catch (NumberFormatException e) {
+                tilLamaParkir.setError("Input jam tidak valid!");
+                isValid = false;
+            }
+        }
+
+        // Jika semua input lolos validasi (Tidak ada error)
+        if (isValid) {
+            String jenisKendaraan = rbMotor.isChecked() ? "Sepeda Motor" : "Mobil";
+
+            /* LOGIKA DERET ARITMATIKA (Sn)
+             * Motor : Jam ke-1 (a) = 3000, Beda kenaikan per jam (b) = 1000
+             * Mobil : Jam ke-1 (a) = 5000, Beda kenaikan per jam (b) = 2000
+             */
+            int a = rbMotor.isChecked() ? 3000 : 5000;
+            int b = rbMotor.isChecked() ? 1000 : 2000;
+
+            // Rumus Sn = (n / 2) * (2a + (n - 1)b)
+            int totalBayar = (n * (2 * a + (n - 1) * b)) / 2;
+
+            // PANGGIL POP UP DIALOG
+            tampilkanPopUpKarcis(nama, jenisKendaraan, merk, plat, totalBayar);
+        }
     }
 
-}
+    // Method khusus untuk menampilkan Jendela Pop Up Karcis
+    private void tampilkanPopUpKarcis(String nama, String jenis, String merk, String plat, int total) {
+        // 1. Inflate / tiup layout dialog_karcis.xml menjadi bentuk View
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_karcis, null);
 
+        // 2. Hubungkan TextView yang ada di dalam layout dialog_karcis.xml
+        TextView KarcisNama = dialogView.findViewById(R.id.KarcisNama);
+        TextView KarcisKendaraan = dialogView.findViewById(R.id.KarcisKendaraan);
+        TextView KarcisTotal = dialogView.findViewById(R.id.KarcisTotal);
+
+        // 3. Set text hasil perhitungan ke komponen Pop Up Dialog
+        KarcisNama.setText("Nama Pengguna: " + nama);
+        KarcisKendaraan.setText("Kendaraan: " + jenis + " (" + merk + " - " + plat.toUpperCase() + ")");
+        KarcisTotal.setText("Total Bayar: Rp " + String.format("%,d", total).replace(',', '.'));
+
+        // 4. Buat dan Tampilkan AlertDialog Pop Up
+        new AlertDialog.Builder(MainActivity.this)
+                .setView(dialogView)
+                .setPositiveButton("TUTUP / CETAK", (dialog, which) -> dialog.dismiss())
+                .create()
+                .show();
+    }
+}
