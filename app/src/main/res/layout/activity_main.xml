@@ -80,17 +80,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:text="Masukan Merek:"
+                    android:text="Pilih Area Parkir Swalayan"
                     android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/InputMerkKendaraan"
+                <RadioGroup
+                    android:id="@+id/JenisParkir"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:maxLength="30"
+                    android:layout_height="match_parent"
                     android:layout_marginBottom="12dp"
-                    android:hint="Merk Kendaraan (cth: Honda Vario)"
-                    android:inputType="text" />
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/Luar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Luar" />
+
+                    <RadioButton
+                        android:id="@+id/Dalam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="Dalam" />
+                </RadioGroup>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -120,6 +132,14 @@
                         android:text="Mobil" />
                 </RadioGroup>
 
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="Durasi Parkir:"
+                    android:textStyle="bold" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -141,7 +161,7 @@
                         android:layout_width="150dp"
                         android:layout_height="60dp"
                         android:layout_marginBottom="16dp"
-                        android:hint="Lama Parkir (Jam, maks 36)"
+                        android:hint="maks 36 Jam"
                         android:inputType="number"
                         android:textAlignment="center"
                         android:maxLength="2" />
