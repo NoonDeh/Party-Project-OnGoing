@@ -150,7 +150,7 @@ int totalBayar;
     AlertDialog createDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Total Pembayaran");
-        builder.setMessage("Nama Pengguna: " + nama + "\n\n" + "Kendaraan: " + jenisPilihan + " - " + " (" + plat + ")" + "\n\n" + "Area Parkir: " + jenisPilihanParkir + "\n\n" + "Total Bayar: Rp " + String.format(java.util.Locale.GERMANY, "%,d", totalBayar ));
+        builder.setMessage("Nama Pengguna: " + nama + "\n\n" + "Kendaraan: " + jenisPilihan + "\n\n" + "Plat Motor: " + plat + "\n\n" + "Area Parkir: " + jenisPilihanParkir + " Swalayan" + "\n\n" + "Total Bayar: Rp " + String.format(java.util.Locale.GERMANY, "%,d", totalBayar ));
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
