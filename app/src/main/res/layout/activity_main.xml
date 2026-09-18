@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ScrollView: Mengizinkan seluruh elemen layar bisa di-scroll jika dijalankan di layar HP kecil -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,24 +7,27 @@
     android:fillViewport="true"
     tools:context=".MainActivity">
 
-    <!-- LinearLayout Utama: Menyusun komponen form dari atas ke bawah secara vertikal -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- TextView: Judul Utama Aplikasi -->
+        <!-- Judul -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="#6A1B9A"
+            android:textAlignment="center"
             android:text="Sistem Pembayaran Parkir"
-            android:textColor="#6A1B9A"
+            android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold" />
 
-        <!-- MaterialCardView: Kartu wadah untuk mengelompokkan input form -->
+        <!-- Card Input -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +35,6 @@
             app:cardCornerRadius="12dp"
             app:cardElevation="4dp">
 
-            <!-- LinearLayout Di Dalam Card: Menampung elemen form input -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,57 +42,56 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:text="Nama pemilik :"
+                    android:text="Masukan Nama:"
                     android:textStyle="bold" />
 
-
-                <!-- EditText: Input Nama Pengguna -->
                 <EditText
                     android:id="@+id/InputNama"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginBottom="8dp"
+                    android:maxLength="100"
                     android:hint="Nama Pengguna / Pemilik"
                     android:inputType="textPersonName" />
 
                 <TextView
+                    android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:text="nomor plat kendaraan :"
+                    android:text="Masukan Plat Nomor:"
                     android:textStyle="bold" />
 
-
-                <!-- EditText: Input Nomor Plat Kendaraan -->
                 <EditText
                     android:id="@+id/InputNomorPlat"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
+                    android:maxLength="15"
                     android:layout_marginBottom="8dp"
                     android:hint="Nomor Plat Kendaraan (cth: AD 1234 AB)"
                     android:inputType="textCapCharacters" />
 
                 <TextView
+                    android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:text="merk kendaraan :"
+                    android:text="Masukan Merek:"
                     android:textStyle="bold" />
 
-
-                <!-- EditText: Input Merk Kendaraan -->
                 <EditText
                     android:id="@+id/InputMerkKendaraan"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
+                    android:maxLength="30"
                     android:layout_marginBottom="12dp"
                     android:hint="Merk Kendaraan (cth: Honda Vario)"
                     android:inputType="text" />
 
-                <!-- TextView: Label Pilihan Jenis Kendaraan -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -99,7 +99,6 @@
                     android:text="Pilih Jenis Kendaraan:"
                     android:textStyle="bold" />
 
-                <!-- RadioGroup: Wadah pilihan opsi radio button (Motor / Mobil) -->
                 <RadioGroup
                     android:id="@+id/JenisKendaraan"
                     android:layout_width="match_parent"
@@ -107,14 +106,12 @@
                     android:layout_marginBottom="12dp"
                     android:orientation="horizontal">
 
-                    <!-- RadioButton: Pilihan Sepeda Motor -->
                     <RadioButton
                         android:id="@+id/Motor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sepeda Motor" />
 
-                    <!-- RadioButton: Pilihan Mobil -->
                     <RadioButton
                         android:id="@+id/Mobil"
                         android:layout_width="wrap_content"
@@ -123,7 +120,6 @@
                         android:text="Mobil" />
                 </RadioGroup>
 
-                <!-- LinearLayout Horizontal: Baris penyusun tombol counter waktu (-) dan (+) -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -131,17 +127,15 @@
                     android:gravity="left"
                     android:orientation="horizontal">
 
-                    <!-- Button: Tombol Kurangi Waktu Parkir -->
                     <Button
                         android:id="@+id/Kurang_waktu"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:onClick="Kurang_waktu"
                         android:text="-"
                         android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:onClick="Kurang_waktu"/>
 
-                    <!-- EditText: Input/Display Angka Lama Parkir -->
                     <EditText
                         android:id="@+id/InputJam"
                         android:layout_width="150dp"
@@ -149,31 +143,69 @@
                         android:layout_marginBottom="16dp"
                         android:hint="Lama Parkir (Jam, maks 36)"
                         android:inputType="number"
-                        android:maxLength="2"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:maxLength="2" />
 
-                    <!-- Button: Tombol Tambah Waktu Parkir -->
                     <Button
                         android:id="@+id/Tambah_waktu"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:onClick="Tambah_waktu"
                         android:text="+"
                         android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:onClick="Tambah_waktu"/>
                 </LinearLayout>
 
-                <!-- Button: Tombol Eksekusi Proses Pembayaran -->
                 <Button
                     android:id="@+id/Bayar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#6A1B9A"
-                    android:onClick="prosesPembayaran"
                     android:text="PROSES PEMBAYARAN"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <LinearLayout
+            android:id="@+id/LayoutKarcis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/JudulKarcis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Ringkasan Karcis Parkir"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/KarcisNama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama Pengguna: -"
+                android:textColor="#555555" />
+
+            <TextView
+                android:id="@+id/KarcisKendaraan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Kendaraan: -"
+                android:textColor="#555555" />
+
+            <TextView
+                android:id="@+id/KarcisTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Total Bayar: Rp 0"
+                android:textColor="#1A237E"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
