@@ -20,7 +20,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
 Button bayar;
-String nama, plat, merk, jamString, jenisPilihan;
+String nama, plat, jenisPilihanParkir, jamString, jenisPilihan, area;
 int totalBayar;
 
 
@@ -39,7 +39,7 @@ int totalBayar;
 
                     EditText InputNama = findViewById(R.id.InputNama);
                     EditText InputNomorPlat = findViewById(R.id.InputNomorPlat);
-                    EditText InputMerkKendaraan = findViewById(R.id.InputMerkKendaraan);
+
                     EditText InputJam = findViewById(R.id.InputJam);
 
                     LinearLayout LayoutKarcis = findViewById(R.id.LayoutKarcis);
@@ -51,21 +51,22 @@ int totalBayar;
 
                      nama = InputNama.getText().toString().trim();
                      plat = InputNomorPlat.getText().toString().trim();
-                     merk = InputMerkKendaraan.getText().toString().trim();
                      jamString = InputJam.getText().toString().trim();
 
                     RadioGroup JnsKnd = findViewById(R.id.JenisKendaraan);
                     int HasilPilihJenisKendaraan = JnsKnd.getCheckedRadioButtonId();
+
+                    RadioGroup JnsPrk = findViewById(R.id.JenisParkir);
+                    int HasilPilihJenisParkir = JnsPrk.getCheckedRadioButtonId();
 
                     int maksJamParkir = 36;
                     int tarifAwal;
                     int tarifLanjutan;
 
 
-
                     if (!nama.isEmpty()) {
                         if (!plat.isEmpty()) {
-                            if (!merk.isEmpty()) {
+                            if (HasilPilihJenisParkir != -1) {
                                 if (!jamString.isEmpty()) {
                                     int jam = Integer.parseInt(jamString);
                                     if (jam > 0) {
@@ -74,6 +75,15 @@ int totalBayar;
 
                                                 RadioButton PilihanRadioButton = findViewById(HasilPilihJenisKendaraan);
                                                 jenisPilihan = PilihanRadioButton.getText().toString();
+
+                                                RadioButton PilihanRadioButton_parkir = findViewById(HasilPilihJenisParkir);
+                                                jenisPilihanParkir = PilihanRadioButton_parkir.getText().toString();
+
+                                                if (jenisPilihanParkir.equals("Luar")) {
+                                                    area = "Luar";
+                                                } else {
+                                                    area = "Dalam";
+                                                }
 
                                                 if (jenisPilihan.equals("Mobil")) {
                                                     tarifAwal = 10000;
@@ -84,13 +94,14 @@ int totalBayar;
                                                 }
 
                                                 totalBayar = tarifAwal + tarifLanjutan * (jam - 1);
+                                                jenisPilihanParkir = area;
 
 
                                                 //bgn HasilTampil
                                                 JudulKarcis.setText("Ringkasan Karcis Parkir");
 
                                                 KarcisNama.setText("Nama Pengguna: " + nama);
-                                                KarcisKendaraan.setText("Kendaraan: " + jenisPilihan + " - " + merk + " (" + plat + ")");
+                                                KarcisKendaraan.setText("Kendaraan: " + jenisPilihan + " - " + "(" + jenisPilihanParkir +")"+ " (" + plat + ")");
                                                 KarcisTotal.setText("Total Bayar: Rp " + String.format(java.util.Locale.GERMANY, "%,d", totalBayar));
                                                 AlertDialog dialog = createDialog();
                                                 dialog.show();
@@ -109,7 +120,7 @@ int totalBayar;
                                     Toast.makeText(MainActivity.this, "Masukan Lama Parkir Terlebih dahulu!", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(MainActivity.this,"Masukan Merek Kendaraan Terlebih Dahulu!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this,"Pilih Area Parkir Terlebih Dahulu!", Toast.LENGTH_SHORT).show();
                             }
                         }
                         else {
@@ -139,7 +150,7 @@ int totalBayar;
     AlertDialog createDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Total Pembayaran");
-        builder.setMessage("Nama Pengguna: " + nama + "\n\n" + "Kendaraan: " + jenisPilihan + " - " + merk + " (" + plat + ")" + "\n\n" + "Total Bayar: Rp " + String.format(java.util.Locale.GERMANY, "%,d", totalBayar ));
+        builder.setMessage("Nama Pengguna: " + nama + "\n\n" + "Kendaraan: " + jenisPilihan + " - " + " (" + plat + ")" + "\n\n" + "Area Parkir: " + jenisPilihanParkir + "\n\n" + "Total Bayar: Rp " + String.format(java.util.Locale.GERMANY, "%,d", totalBayar ));
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
