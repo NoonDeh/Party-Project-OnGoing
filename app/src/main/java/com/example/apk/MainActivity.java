@@ -60,7 +60,6 @@ int totalBayar;
                     int maksJamParkir = 36;
                     int tarifAwal;
                     int tarifLanjutan;
-                    int tarifMaks;
 
 
 
@@ -79,18 +78,13 @@ int totalBayar;
                                                 if (jenisPilihan.equals("Mobil")) {
                                                     tarifAwal = 10000;
                                                     tarifLanjutan = 5000;
-                                                    tarifMaks = 30000;
                                                 } else {
                                                     tarifAwal = 5000;
                                                     tarifLanjutan = 2000;
-                                                    tarifMaks = 15000;
                                                 }
 
                                                 totalBayar = tarifAwal + tarifLanjutan * (jam - 1);
 
-                                                if (totalBayar > tarifMaks) {
-                                                    totalBayar = tarifMaks;
-                                                }
 
                                                 //bgn HasilTampil
                                                 JudulKarcis.setText("Ringkasan Karcis Parkir");
@@ -101,12 +95,12 @@ int totalBayar;
                                                 AlertDialog dialog = createDialog();
                                                 dialog.show();
 
-                                                Toast.makeText(MainActivity.this, "Total Bayar : Rp" + String.format(java.util.Locale.GERMANY,"%,d", totalBayar), Toast.LENGTH_SHORT).show();
+
                                             } else {
                                                 Toast.makeText(MainActivity.this,"Silahkan Pilih Jenis Kendaraan Terlebih Dahulu", Toast.LENGTH_SHORT).show();
                                             }
                                         } else {
-                                            Toast.makeText(MainActivity.this, "Lama Parkir Maksimal" + maksJamParkir +"Jam!", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(MainActivity.this, "Lama Parkir Maksimal " + maksJamParkir +" Jam!", Toast.LENGTH_SHORT).show();
                                         }
                                     } else {
                                         Toast.makeText(MainActivity.this, "Jam tidak boleh 0(nol)!", Toast.LENGTH_SHORT).show();

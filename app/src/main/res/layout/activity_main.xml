@@ -18,8 +18,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="#6A1B9A"
+            android:textAlignment="center"
             android:text="Sistem Pembayaran Parkir"
-            android:textColor="#6A1B9A"
+            android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -37,26 +41,53 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="Masukan Nama:"
+                    android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/InputNama"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginBottom="8dp"
+                    android:maxLength="100"
                     android:hint="Nama Pengguna / Pemilik"
                     android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="Masukan Plat Nomor:"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/InputNomorPlat"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
+                    android:maxLength="15"
                     android:layout_marginBottom="8dp"
                     android:hint="Nomor Plat Kendaraan (cth: AD 1234 AB)"
                     android:inputType="textCapCharacters" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="Masukan Merek:"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/InputMerkKendaraan"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
+                    android:maxLength="30"
                     android:layout_marginBottom="12dp"
                     android:hint="Merk Kendaraan (cth: Honda Vario)"
                     android:inputType="text" />
@@ -130,7 +161,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#6A1B9A"
-                    android:onClick="prosesPembayaran"
                     android:text="PROSES PEMBAYARAN"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
